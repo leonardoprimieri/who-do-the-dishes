@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import { ReactComponent as Banner } from './img/banner.svg';
 import './App.css';
 
 function App() {
+  const [names, setNames] = useState(['Leo', 'Feef']);
+  const [dishes, setDishes] = useState(['Heavy', 'Light']);
+  const [dish, setDish] = useState();
+
+  const [winner, setWinner] = useState();
+
+  function handleChoice(arr) {
+    setWinner(names[Math.floor(Math.random() * 2)]);
+    setDish(dishes[Math.floor(Math.random() * 2)]);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className="container"
+      style={
+        dish === 'Heavy' ? { background: '#192a56' } : { background: '#78e08f' }
+      }
+    >
+      <div className="content">
+        <div className="info">
+          <span>
+            {winner} clean the {dish}
+          </span>
+          <button className="btn-choice" onClick={handleChoice}>
+            Choose
+          </button>
+        </div>
+        <Banner />
+      </div>
     </div>
   );
 }
